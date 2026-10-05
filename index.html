@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pheromone Colony — emergent ant trail simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>🐜 Pheromone Colony</h1>
+    <p class="subtitle">Emergent trail formation from simple agent rules — no central brain, no A* pathfinding.</p>
+  </header>
+
+  <div id="layout">
+    <canvas id="world" width="960" height="640"></canvas>
+
+    <aside id="panel">
+      <section>
+        <h2>Colony</h2>
+        <label>Ants <output id="antsOut">400</output>
+          <input type="range" id="ants" min="50" max="1500" step="50" value="400">
+        </label>
+        <label>Speed <output id="speedOut">2.0</output>
+          <input type="range" id="speed" min="0.5" max="4" step="0.1" value="2">
+        </label>
+        <label>Sensor angle <output id="senseOut">0.5 rad</output>
+          <input type="range" id="sense" min="0.1" max="1.2" step="0.05" value="0.5">
+        </label>
+        <label>Sensor distance <output id="distOut">14</output>
+          <input type="range" id="dist" min="4" max="40" step="1" value="14">
+        </label>
+      </section>
+
+      <section>
+        <h2>Pheromones</h2>
+        <label>Deposit <output id="depOut">8</output>
+          <input type="range" id="dep" min="1" max="30" step="1" value="8">
+        </label>
+        <label>Evaporation <output id="evapOut">0.12</output>
+          <input type="range" id="evap" min="0.01" max="0.5" step="0.01" value="0.12">
+        </label>
+        <label>Diffusion <output id="diffOut">2</output>
+          <input type="range" id="diff" min="0" max="6" step="1" value="2">
+        </label>
+      </section>
+
+      <section>
+        <h2>World</h2>
+        <label>Food piles <output id="pilesOut">5</output>
+          <input type="range" id="piles" min="1" max="12" step="1" value="5">
+        </label>
+        <div class="btnrow">
+          <button id="scatter">Scatter food</button>
+          <button id="reset">Reset</button>
+          <button id="pause">Pause</button>
+        </div>
+        <div class="tools">
+          <span>Draw:</span>
+          <button class="tool active" data-tool="food">Food</button>
+          <button class="tool" data-tool="wall">Wall</button>
+          <button class="tool" data-tool="erase">Erase</button>
+        </div>
+        <p class="hint">Drag on the canvas to paint with the selected tool. Ants can't cross walls.</p>
+      </section>
+
+      <section id="stats">
+        <h2>Stats</h2>
+        <div id="statlines">FPS — · Food remaining — · Food delivered —</div>
+      </section>
+    </aside>
+  </div>
+</div>
+<script src="src/sim.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>

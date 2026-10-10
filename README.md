@@ -11,6 +11,8 @@ and evaporates on a grid every tick.
 
 - Real-time canvas simulation (960×640) with up to 1,500 ants
 - Two-channel pheromone field with adjustable deposit, evaporation, and diffusion
+- Food odor sensing: foraging ants near a pile turn toward it even without a trail
+  (adjustable odor range)
 - Tunable ant sensing: sensor angle, sensor distance, speed, population
 - Paint directly on the canvas: drop food, draw walls ants must route around, or erase
 - Live stats: FPS, food remaining, food delivered

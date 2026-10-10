@@ -13,6 +13,7 @@ const params = {
   diffusion: 2,
   wander: 0.5,
   turnSpeed: 0.2,
+  odorDist: 70,
 };
 
 const nest = { x: W / 2, y: H / 2, r: 22 };
@@ -191,6 +192,7 @@ bindRange("dist", v => params.sensorDist = v);
 bindRange("dep", v => params.deposit = v);
 bindRange("evap", v => params.evap = v);
 bindRange("diff", v => params.diffusion = v);
+bindRange("odor", v => params.odorDist = v);
 bindRange("piles", () => {});
 
 document.getElementById("scatter").addEventListener("click", () =>

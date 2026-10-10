@@ -88,6 +88,24 @@ class Ant {
 
     const wander = (Math.random() - 0.5) * 2 * params.wander;
 
+    // --- food odor: foraging ants with no trail to follow sniff nearby piles
+    // and turn toward the closest one, giving the colony a discovery boost
+    if (!this.carrying && mid + left + right < 1) {
+      const odor = params.odorDist;
+      let best = null, bestD2 = odor * odor;
+      for (const pile of sim.foodPiles) {
+        if (pile.amount <= 0) continue;
+        const d2 = (this.x - pile.x) ** 2 + (this.y - pile.y) ** 2;
+        if (d2 < bestD2) { bestD2 = d2; best = pile; }
+      }
+      if (best) {
+        const target = Math.atan2(best.y - this.y, best.x - this.x);
+        let diff = target - this.angle;
+        diff = Math.atan2(Math.sin(diff), Math.cos(diff));   // wrap to [-pi, pi]
+        this.angle += Math.sign(diff) * Math.min(Math.abs(diff), params.turnSpeed * 1.5);
+      }
+    }
+
     if (mid > left && mid > right) {
       // keep going
     } else if (left > right) {

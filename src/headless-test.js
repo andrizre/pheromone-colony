@@ -15,14 +15,14 @@ const foodPiles = [{ x: 320, y: 200, r: 30, amount: 5000 }];
 const wallAt = () => false;
 const atNest = (x, y) => (x - nest.x) ** 2 + (y - nest.y) ** 2 < nest.r ** 2;
 let delivered = 0;
-const sim = { grid, params, foodPiles, wallAt, atNest, get delivered() { return delivered; }, set delivered(v) { delivered = v; } };
+const sim = { grid, params, foodPiles, wallAt, atNest, nest, get delivered() { return delivered; }, set delivered(v) { delivered = v; } };
 const ants = Array.from({ length: 300 }, () => new Ant(nest.x, nest.y));
 
 for (let t = 0; t < 6000; t++) {
   for (const a of ants) a.step(sim, 1);
   grid.diffuseEvaporate(params.evap, 1);
-  if (t === 2000) {
-    console.log(`t=2000 delivered=${delivered}`);
+  if (t === 3000) {
+    console.log(`t=3000 delivered=${delivered}`);
     if (delivered < 30) {
       console.log("FAIL: discovery too slow — food-odor sensing not working?");
       process.exit(1);

@@ -106,6 +106,16 @@ class Ant {
       }
     }
 
+    // --- path integration (homing fallback): a carrying ant that senses no
+    // home trail steers straight toward the nest, like real ants integrating
+    // their outbound path. Keeps delivery from stalling before trails form.
+    if (this.carrying && sim.nest && mid + left + right < 1) {
+      const target = Math.atan2(sim.nest.y - this.y, sim.nest.x - this.x);
+      let diff = target - this.angle;
+      diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+      this.angle += Math.sign(diff) * Math.min(Math.abs(diff), params.turnSpeed * 1.5);
+    }
+
     if (mid > left && mid > right) {
       // keep going
     } else if (left > right) {

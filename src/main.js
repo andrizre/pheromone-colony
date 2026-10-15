@@ -210,7 +210,7 @@ function frame(now) {
   fps = fps * 0.9 + (1000 / Math.max(1, now - last)) * 0.1;
   last = now;
   if (!paused) {
-    for (const a of ants) a.step({ grid, params, foodPiles, wallAt, atNest, get delivered() { return delivered; }, set delivered(v) { delivered = v; } }, 1);
+    for (const a of ants) a.step({ grid, params, foodPiles, wallAt, atNest, nest, get delivered() { return delivered; }, set delivered(v) { delivered = v; } }, 1);
     grid.diffuseEvaporate(params.evap, params.diffusion > 0 ? 1 : 0);
   }
   drawScene();
